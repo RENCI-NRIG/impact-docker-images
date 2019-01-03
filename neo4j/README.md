@@ -2,8 +2,8 @@
 
 ### Versions available:
 
-- 3.5.0, latest: ([Dockerfile](neo4j/3.5.0/Dockerfile))
-- 3.4.7: ([Dockerfile](neo4j/3.4.7/Dockerfile))
+- 3.5.0, latest: ([Dockerfile](3.5.0/Dockerfile))
+- 3.4.7: ([Dockerfile](3.4.7/Dockerfile))
 
 ### What is Neo4j?
 
