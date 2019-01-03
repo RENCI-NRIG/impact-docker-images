@@ -3,7 +3,7 @@
 Docker images for ImPACT project
 
 
-## neo4j/APOC
+## [neo4j/APOC](neo4j)
 
 Versions available:
 
@@ -20,19 +20,3 @@ What is APOC?
 
 - APOC stands for Awesome Procedures on Cypher. Before APOC’s release, developers needed to write their own procedures and functions for common functionality that Cypher or the Neo4j database had not yet implemented for support. Each developer might write his own version of these functions, causing a lot of duplication.
 
-
-How to run:
-
-```
-docker run -d \
-  --user=$(id -u):$(id -g) \
-  --name=neo4j \
-  --publish=7473:7473 \
-  --publish=7474:7474 \
-  --publish=7687:7687 \
-  --volume=${NEO4J_HOST_PATH:-$(pwd)/neo4j/data}:/data \
-  --volume=${NEO4J_HOST_PATH:-$(pwd)/neo4j/logs}:/logs \
-  --volume=${NEO4J_HOST_PATH:-$(pwd)/neo4j}:${NEO4J_DOCKER_PATH:-/imports/} \
-  -e NEO4J_AUTH=${NEO4J_USER:-neo4j}/${NEO4J_PASS:-password} \
-  rencinrig/neo4j-apoc:latest
-```
