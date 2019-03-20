@@ -76,17 +76,3 @@ GitHub releases: [https://github.com/basho/riak/releases](https://github.com/bas
 
 Precompiled build files: [https://files.tiot.jp/riak/kv/2.9/2.9.0rc5/rhel/7/](https://files.tiot.jp/riak/kv/2.9/2.9.0rc5/rhel/7/)
 
-```
-docker run --rm -ti \
-  -p 8098:8098 \
-  -p 8087:8087 \
-  centos:7 /bin/bash
-```
-
-
-```
-docker run --rm -ti --name riak \
-  -p 8098:8098 \
-  -p 8087:8087 \
-  riak:latest /bin/bash
-```
