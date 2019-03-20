@@ -74,5 +74,5 @@ Riak for SAFE test entry
 
 GitHub releases: [https://github.com/basho/riak/releases](https://github.com/basho/riak/releases)
 
-Precompiled build files: [https://files.tiot.jp/riak/kv/2.9/2.9.0rc5/rhel/7/](https://files.tiot.jp/riak/kv/2.9/2.9.0rc5/rhel/7/)
+Precompiled build files: [https://files.tiot.jp/riak/kv/](https://files.tiot.jp/riak/kv/)
 
