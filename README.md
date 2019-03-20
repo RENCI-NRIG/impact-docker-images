@@ -15,3 +15,8 @@ What is APOC?
 
 - APOC stands for Awesome Procedures on Cypher. Before APOC’s release, developers needed to write their own procedures and functions for common functionality that Cypher or the Neo4j database had not yet implemented for support. Each developer might write his own version of these functions, causing a lot of duplication.
 
+## [Riak KV](riak-for-safe)
+
+What is Riak KV?
+
+- Riak KV is a distributed NoSQL [key-value database](https://riak.com/resources/key-value-databases/index.html?p=12513.html) with advanced local and multi-cluster replication that guarantees reads and writes even in the event of hardware failures or network partitions.
