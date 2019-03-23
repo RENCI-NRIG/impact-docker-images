@@ -26,8 +26,8 @@ docker run -d \
   -e RIAK_IP=FQDN_OR_IP_FOR_RIAK \
   -e SLANG_SCRIPT=PATH_TO_SLANG_SCRIPT \
   -e SLANG_CONF=PATH_TO_SLANG_CONF \
-  --volume=$(pwd)/example-strong/imports:/imports \
-  --volume=$(pwd)/example-strong/principalkeys:/principalkeys \
+  --volume=LOCAL_PATH_TO/imports:/imports \
+  --volume=LOCAL_PATH_TO/principalkeys:/principalkeys \
   rencinrig/safe-server:latest
 ```
 
