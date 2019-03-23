@@ -1,2 +1,6 @@
 .DS_Store
 .idea
+### ignore SAFE artifacts ###
+safe-server/example-strong/imports
+safe-server/example-strong/principalkeys
+safe-server/venv

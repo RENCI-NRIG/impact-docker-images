@@ -3,7 +3,7 @@
 Docker images for ImPACT project
 
 
-## [neo4j/APOC](neo4j)
+## [Neo4j/APOC](neo4j)
 
 What is Neo4j?
 
@@ -14,6 +14,12 @@ What is Neo4j?
 What is APOC?
 
 - APOC stands for Awesome Procedures on Cypher. Before APOC’s release, developers needed to write their own procedures and functions for common functionality that Cypher or the Neo4j database had not yet implemented for support. Each developer might write his own version of these functions, causing a lot of duplication.
+
+## [SAFE Server](safe-server)
+
+What is SAFE Server?
+
+- Secure Access For Everyone (SAFE), is an integrated system for managing trust using a logic-based declarative language. Logical trust systems authorize each request by constructing a proof from a context — a set of authenticated logic statements representing credentials and policies issued by various principals in a networked system.
 
 ## [Riak KV](riak-for-safe)
 
