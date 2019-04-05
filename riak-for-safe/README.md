@@ -25,8 +25,8 @@ docker run -d \
   --name=riak \
   --publish=8098:8098 \
   --publish=8087:8087 \
-  --volume=$(pwd)/riak/data:/data \
-  --volume=$(pwd)/riak/config:/imports \
+  --volume=$(pwd)/riak/data:/var/lib/riak \
+  --volume=$(pwd)/riak/config:/etc/riak \
   rencinrig/riak-for-safe:latest
 ```
 

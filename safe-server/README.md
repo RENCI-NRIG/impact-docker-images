@@ -26,6 +26,7 @@ docker run -d \
   -e RIAK_IP=FQDN_OR_IP_FOR_RIAK \
   -e SLANG_SCRIPT=PATH_TO_SLANG_SCRIPT \
   -e SLANG_CONF=PATH_TO_SLANG_CONF \
+  -e SAFE_ROOT_PUB=ROOT_PUBLIC_KEY.pub \
   --volume=$(pwd)/example-strong/imports:/imports \
   --volume=$(pwd)/example-strong/principalkeys:/principalkeys \
   rencinrig/safe-server:latest
@@ -104,7 +105,7 @@ docker run -d \
   -e RIAK_IP=host.docker.internal \
   -e SLANG_SCRIPT=strong/strong.slang \
   -e SLANG_CONF=strong/strong.conf.slang \
-  -e STRONG_ROOT_PUB=strong-1.pub \
+  -e SAFE_ROOT_PUB=strong-1.pub \
   --volume=$(pwd)/example-strong/imports:/imports \
   --volume=$(pwd)/example-strong/principalkeys:/principalkeys \
   rencinrig/safe-server:latest

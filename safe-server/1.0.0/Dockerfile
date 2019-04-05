@@ -42,7 +42,7 @@ ENV \
   RIAK_IP=riak \
   SLANG_SCRIPT=strong/strong.slang \
   SLANG_CONF=strong/strong.conf.slang \
-  STRONG_ROOT_PUB=strong-1.pub
+  SAFE_ROOT_PUB=strong-1.pub
 
 COPY docker-entrypoint.sh /root/
 VOLUME ["/imports", "/principalkeys"]
