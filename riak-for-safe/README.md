@@ -2,8 +2,8 @@
 
 ### Versions available
 
-- 2.9.0rc6, latest: ([Dockerfile](2.9.0rc6/Dockerfile))
-
+- 2.9.0p1, latest: ([Dockerfile](2.9.0p1/Dockerfile))
+- 2.9.0rc6: ([Dockerfile](2.9.0rc6/Dockerfile))
 
 ### What is Riak KV?
 
