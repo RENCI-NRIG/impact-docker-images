@@ -19,28 +19,11 @@ function postTwoFlowDataOwnerPolicy {
 	curl ${CURL_OPTS} http://$SAFE_HOST:$SAFE_PORT/postTwoFlowDataOwnerPolicy -H "Content-Type: application/json" -d "{ \"principal\": \"$1\", \"methodParams\": [\"$2\", \"$3\", \"$4\"] }" | jq ".result, .message"
 }
 
-# WP portion
-PRINCIPAL=dp1
-PRINCIPALDIR=${PRINCIPAL%1}
-UUID1=6ec7211c-caaf-4e00-ad36-0cd413accc91
-UUID2=1b924687-a317-4bd7-a54f-a5a0151f49d3
-UUID3=26dbc728-3c8d-4433-9c4b-2e065b644db5
+PRINCIPAL=dso1
 
-DPHASH=`../../scripts/hash_gen.py ../principals/${PRINCIPALDIR}/${PRINCIPAL}.pub`
-DATASET=$DPHASH:$UUID3
+. ./common-info.sh
 
-WP=wp1
-WPDIR=${WP%1}
-WPHASH=`../../scripts/hash_gen.py ../principals/${WPDIR}/${WP}.pub`
-WF1=$WPHASH:$UUID1
-WF2=$WPHASH:$UUID2
-
-echo Working on behalf of $PRINCIPAL 
-echo WF1 is $WF1
-echo WF2 is $WF2
-echo DATASET is $DATASET
-
-# postRawId set for DP
+# postRawId set for DSO
 postRawIdSet $PRINCIPAL
 
 # publish two-flow policy

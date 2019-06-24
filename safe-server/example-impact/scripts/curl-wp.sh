@@ -19,19 +19,9 @@ function postPerFlowRule {
 	curl ${CURL_OPTS} http://$SAFE_HOST:$SAFE_PORT/postPerFlowRule -H "Content-Type: application/json" -d "{ \"principal\": \"$1\", \"methodParams\": [\"$2\"] }" | jq ".result, .message"
 }
 
-# WP portion
 PRINCIPAL=wp1
-UUID1=6ec7211c-caaf-4e00-ad36-0cd413accc91
-UUID2=1b924687-a317-4bd7-a54f-a5a0151f49d3
 
-PRINCIPALDIR=${PRINCIPAL%1}
-WPHASH=`../../scripts/hash_gen.py ../principals/${PRINCIPALDIR}/${PRINCIPAL}.pub`
-WF1=$WPHASH:$UUID1
-WF2=$WPHASH:$UUID2
-
-echo Working on behalf of $PRINCIPAL 
-echo WF1 is $WF1
-echo WF2 is $WF2
+. ./common-info.sh
 
 # postRawId set for WP
 postRawIdSet $PRINCIPAL
