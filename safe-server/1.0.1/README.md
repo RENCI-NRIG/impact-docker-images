@@ -14,7 +14,7 @@ The structure of example-impact is as follows:
 First create a directory structure for /imports volumes for each of the SAFE servers under the example-impact/:
 ```
 $ cd example-impact
-$ mkdir -p imports/wp imports/dp imports/ns imports/presidio
+$ mkdir -p imports/wp imports/dso imports/ns imports/presidio
 $ mkdir -p riak/data riak/conf
 ```
 they will be needed by the `start-dockers.sh` script to volume mount different directories for each of the containers.
@@ -27,7 +27,7 @@ Wait for a long time, checking logging outputs from each container:
 ```
 $ docker logs riak
 $ docker logs impact-wp
-$ docker logs impact-dp
+$ docker logs impact-dso
 $ docker logs impact-ns
 $ docker logs impact-presidio
 ```
@@ -70,8 +70,8 @@ postPerFlowRule
 
 Now on behalf of the DP:
 ```
-./curl-dp.sh
-Working on behalf of dp1
+./curl-dso.sh
+Working on behalf of dso1
 WF1 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
 WF2 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
 DATASET is wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5
