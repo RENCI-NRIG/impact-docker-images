@@ -11,7 +11,7 @@ The structure of example-impact is as follows:
 
 ## Principal keys
 
-As indicated above, the example comes with keys already created. The curl scripts make use of the Python package [pycryptodome](https://pycryptodome.readthedocs.io/en/latest/) in order to generate the hash of public keys. 
+As indicated above, the example comes with keys already created. The curl scripts make use of the Python package [pycryptodome](https://pycryptodome.readthedocs.io/en/latest/) in order to generate the hash of public keys.
 
 Make sure you are executing the scripts from a Python3 environment that has pycryptodome installed:
 
@@ -38,15 +38,14 @@ $ start-dockers.sh
 Wait for a long time, checking logging outputs from each container:
 ```
 $ docker logs riak
-$ docker logs impact-wp
-$ docker logs impact-dso
+$ docker logs impact-wpdso
 $ docker logs impact-ns
 $ docker logs impact-presidio
 ```
 
 # How To Run
 
-Now we are ready to post statements to the various SAFE servers and validate access. Please refer to the ImPACT [MVP script documentation](https://github.com/RENCI-NRIG/SAFE/tree/master/safe-apps/impact) for further explanation.
+Now we are ready to post statements to the various SAFE servers and validate access. Please refer to the ImPACT [MVP script documentation](https://github.com/RENCI-NRIG/SAFE/tree/master/safe-apps/impact) for further explanation. Note that this example uses a combined WP/DSO principal.
 
 Lets check that right now our user `someUser` in project `someProject` can't really get access to the dataset:
 ```
@@ -63,12 +62,15 @@ Check access to dataset wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c
 "Query failed with msg: java.lang.RuntimeException: Unsatisfied queries: List(access('wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5', 'someUser', '9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=', 'someProject')?)  List()"
 ```
 
-Let's post on behalf of the WP first:
+Let's post on behalf of the WP/DSO first:
 ```
-$ ./curl-wp.sh
+$ ./curl-wp-dso.sh
 Working on behalf of wp1
 WF1 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
 WF2 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
+DATASET is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5
+User someUser on project someProject
+NS is 9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=
 postRawIdSet
 "succeed"
 "['wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=']"
@@ -78,21 +80,9 @@ postPerFlowRule
 postPerFlowRule
 "succeed"
 "['iYrj3wquhHonGMQMf53cqmpZMPe9efXIEqOZin2o3Lo=']"
-```
-
-Now on behalf of the DP:
-```
-./curl-dso.sh
-Working on behalf of dso1
-WF1 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
-WF2 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
-DATASET is wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5
-postRawIdSet
+postTwoFlowDataOwnerPolicy for dataset wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5, wf1 wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91, wf2 wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
 "succeed"
-"['wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=']"
-postTwoFlowDataOwnerPolicy for dataset wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5, wf1 wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91, wf2 wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
-"succeed"
-"['cHOF5WISfHd_ZkzuvccN8bUbr0xjKkFX2Ss-fNPXKzA=']"
+"['svHy8ajGgdTufTZ-sGG9tyzgfBTkbO-rbtsPmAGlhHU=']"
 ```
 
 Now on behalf of NS:
@@ -101,8 +91,9 @@ Now on behalf of NS:
 Working on behalf of ns1
 WF1 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
 WF2 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
-DATASET is wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5
+DATASET is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5
 User someUser on project someProject
+NS is 9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=
 postRawIdSet
 "succeed"
 "['9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=']"
@@ -118,27 +109,27 @@ postCommonCompletionReceipt for project someProject, workflow wa152R689MgLaTJUxk
 postUserCompletionReceipt for user someUser, project someProject, workflow wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
 "succeed"
 "['LDK4Mf2oAp4RhmRq3u_uAys75RhA9NXY_wHAsGm1X6k=']"
-postLinkReceiptForDataset for user someUser, project someProject, dataset wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5, workflow wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
+postLinkReceiptForDataset for user someUser, project someProject, dataset wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5, workflow wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
 "succeed"
-"['mJmUzi3bUx5Cq6K6RhfpMZ45zRl-BNfEpGVHOndoEks=']"
-postLinkReceiptForDataset for user someUser, project someProject, dataset wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5, workflow wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
+"['c9SKvye0eGIBwr1VUtCNGRhicutUhkYqChOSuXMs0yI=']"
+postLinkReceiptForDataset for user someUser, project someProject, dataset wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5, workflow wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
 "succeed"
-"['mJmUzi3bUx5Cq6K6RhfpMZ45zRl-BNfEpGVHOndoEks=']"
+"['c9SKvye0eGIBwr1VUtCNGRhicutUhkYqChOSuXMs0yI=']"
 ```
 
 Finally let's check access again:
 
 ```
-./curl-presidio.sh
+$ ./curl-presidio.sh
 Working on behalf of presidio1
 WF1 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:6ec7211c-caaf-4e00-ad36-0cd413accc91
 WF2 is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:1b924687-a317-4bd7-a54f-a5a0151f49d3
-DATASET is wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5
+DATASET is wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5
 User someUser on project someProject
 NS is 9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=
-Check access to dataset wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5, user someUser, NS 9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=, project someProject
+Check access to dataset wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5, user someUser, NS 9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=, project someProject
 "succeed"
-"{ 'BjDPqyYcbTxX__VvRAG8fI3YT7M3eoQJuBjQMJuXhyo=':grantAccess('wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=','wrZvIM4CYb9jvBS_4gJ0VIUVXJQYrc0yrEmveTod5Hk=:26dbc728-3c8d-4433-9c4b-2e065b644db5',someUser,'9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=',someProject) }"
+"{ 'BjDPqyYcbTxX__VvRAG8fI3YT7M3eoQJuBjQMJuXhyo=':grantAccess('wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=','wa152R689MgLaTJUxkLE1wNFwEUdOUVzowkiVbOAmmQ=:26dbc728-3c8d-4433-9c4b-2e065b644db5',someUser,'9QbzxpBeorl7MyPRY5JkHj38Xmzs6tssAXbdP5F2-0c=',someProject) }"
 ```
 
 This indicates that all the proper assertions have been made and the policy guard is satisfied.
