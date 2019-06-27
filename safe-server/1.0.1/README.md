@@ -9,6 +9,18 @@ The structure of example-impact is as follows:
 - example-impact/start-dockers.sh starts all needed docker containers - the Riak and the 4 SAFE containers on on a separate port: WP - 7777, DP/DSO - 7778, NS - 7779 and Presidio - 7780. It also preemptively removes and recreates blank directory structure for Riak to store its data.
 - example-impact/stop-dockers.sh stops and cleans up all the dockers
 
+##Principal keys##
+
+As indicated above, the example comes with keys already created. The curl scripts make use of the Python package [pycryptodome](https://pycryptodome.readthedocs.io/en/latest/) in order to generate the hash of public keys. 
+
+Make sure you are executing the scripts from a Python3 environment that has pycryptodome installed:
+
+```
+virtualenv -p $(which python3) venv
+source venv/bin/activate
+pip install pycryptodome
+```
+
 ## How To Start
 
 First create a directory structure for /imports volumes for each of the SAFE servers under the example-impact/:
