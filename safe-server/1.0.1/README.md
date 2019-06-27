@@ -6,7 +6,7 @@ This Docker configuration is matched to [example-impact](../example-impact) scen
 The structure of example-impact is as follows:
 - example-impact/principals contains the keys for 4 principals (WP, DP/DSO, NS and Presidio), already pregenerated using [safe-keygen.sh](../scripts/safe_keygen.sh) script. There is a single key per directory. SAFE likes operating on directories containing multiple principals' keys, however in this case only one key per directory is needed.
 - example-impact/scripts contains the curl scripts for each of the principals
-- example-impact/start-dockers.sh starts all needed docker containers - the Riak and the 4 SAFE containers on on a separate port: WP - 7777, DP/DSO - 7778, NS - 7779 and Presidio - 7780. It also preemptively removes and recreates blank directory structure for Riak to store its data.
+- example-impact/start-dockers.sh starts all needed docker containers - the Riak and the 4 SAFE containers on on a separate port: WP (or WP/DSO combined) - 7777, DP/DSO - 7778, NS - 7779 and Presidio - 7780. It also preemptively removes and recreates blank directory structure for Riak to store its data and SAFE imports. 
 - example-impact/stop-dockers.sh stops and cleans up all the dockers
 
 ## Principal keys
